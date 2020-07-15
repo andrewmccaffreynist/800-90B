@@ -59,9 +59,9 @@ namespace TaskQueueProcessor
             DatabaseConnector.storeTestResult(db, tr, "1");
             */
 
-          //  MightyOrm dbTestRun = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestRun", "TestRunID");
-          //  MightyOrm dbTestCase = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestCase", "TestCaseID");
-          //  MightyOrm dbTestResult = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestResult", "TestResultID");
+            MightyOrm dbTestRun = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestRun", "TestRunID");
+            MightyOrm dbTestCase = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestCase", "TestCaseID");
+            MightyOrm dbTestResult = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestResult", "TestResultID");
 
 
             TestRun tr = new TestRun();
@@ -81,9 +81,8 @@ namespace TaskQueueProcessor
             tc.TestResults.Add(testResult);
             tr.TestCases.Add(tc);
 
-            // DatabaseConnector.storeTestRun(dbTestRun, dbTestCase, dbTestResult, tr);
+            DatabaseConnector.storeTestRun(dbTestRun, dbTestCase, dbTestResult, tr);
 
-            DatabaseConnector.storeTestRun(tr);
 
 
 

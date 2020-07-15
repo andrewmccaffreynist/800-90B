@@ -7,29 +7,8 @@ namespace TaskQueueProcessor
     class DatabaseConnector
     {
 
-        public static MightyOrm createConnectionTestRun()
+        public static void storeTestRun(MightyOrm db, MightyOrm dbTc, MightyOrm dbTestResult, TestRun tr)
         {
-            return new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestRun", "TestRunID");
-        }
-
-        public static MightyOrm createConnectionTestCase()
-        {
-            return new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestCase", "TestCaseID");
-        }
-
-        public static MightyOrm createConnectionTestResult()
-        {
-            return new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestResult", "TestResultID");
-
-        }
-
-        public static void storeTestRun(TestRun tr)
-        {
-
-            MightyOrm db = DatabaseConnector.createConnectionTestRun();
-            MightyOrm dbTc = DatabaseConnector.createConnectionTestCase();
-            MightyOrm dbTestResult = DatabaseConnector.createConnectionTestResult();
-
             var insert = db.New();
             insert.Category = tr.Category;
             insert.Sha256 = tr.Sha256;
@@ -49,7 +28,7 @@ namespace TaskQueueProcessor
 
         }
 
-        private static void storeTestCase(MightyOrm db, MightyOrm dbTr, TestCase tc, int trID)
+        public static void storeTestCase(MightyOrm db, MightyOrm dbTr, TestCase tc, int trID)
         {
             var insert = db.New();
             insert.TestRunID = trID;
@@ -101,7 +80,7 @@ namespace TaskQueueProcessor
 
         }
 
-        private static void storeTestResult(MightyOrm db, TestResult tr, int tcID)
+        public static void storeTestResult(MightyOrm db, TestResult tr, int tcID)
         {
             var insert = db.New();
 
