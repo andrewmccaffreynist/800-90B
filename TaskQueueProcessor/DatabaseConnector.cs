@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using Mighty;
 
 namespace TaskQueueProcessor
@@ -20,6 +21,12 @@ namespace TaskQueueProcessor
         public static MightyOrm createConnectionTestResult()
         {
             return new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestResult", "TestResultID");
+
+        }
+
+        public static MightyOrm<TaskQueueItem> createConnectionTaskQueueItem()
+        {
+            return new MightyOrm<TaskQueueItem>("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TaskQueue", "TaskQueueID");
 
         }
 
@@ -129,8 +136,41 @@ namespace TaskQueueProcessor
             db.Insert(insert);
 
             Console.WriteLine(insert.TestResultID);
+            
+        }
+
+        public static bool isTaskQueueEmpty()
+        {
+            MightyOrm<TaskQueueItem> db = DatabaseConnector.createConnectionTaskQueueItem();
+            // TaskQueueItem tq = db.Single("SELECT * from TaskQueue");
+
+            TaskQueueItem tq = db.Single("");
+            if (tq == null)
+                return true;
+            else
+                return false;
 
         }
+
+        public static TaskQueueItem getNextTaskQueueItem()
+        {
+            MightyOrm<TaskQueueItem> db = DatabaseConnector.createConnectionTaskQueueItem();
+            // TaskQueueItem tq = db.Single("SELECT * from TaskQueue");
+            TaskQueueItem tq = db.Single("");
+
+            return tq;
+        }
+        public static bool removeTaskQueueItem(int taskQueueID)
+        {
+            MightyOrm<TaskQueueItem> db = DatabaseConnector.createConnectionTaskQueueItem();
+            int numberRemoved = db.Delete(taskQueueID);
+            if (numberRemoved > 0)
+                return true;
+            else
+                return false;
+
+        }
+
 
         static void main(String[] args)
         {

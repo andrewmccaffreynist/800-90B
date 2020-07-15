@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TaskQueueProcessor
 {
-    class TaskQueue
+    class TaskQueueItem
     {
-        public long TaskID { get; set; }
+        public long TaskQueueID { get; set; }
         public string TaskType { get; set; }
         public long DataFileId { get; set; }
         public bool InitialOrConditioned { get; set; }

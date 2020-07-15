@@ -59,33 +59,35 @@ namespace TaskQueueProcessor
             DatabaseConnector.storeTestResult(db, tr, "1");
             */
 
-          //  MightyOrm dbTestRun = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestRun", "TestRunID");
-          //  MightyOrm dbTestCase = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestCase", "TestCaseID");
-          //  MightyOrm dbTestResult = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestResult", "TestResultID");
+            //  MightyOrm dbTestRun = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestRun", "TestRunID");
+            //  MightyOrm dbTestCase = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestCase", "TestCaseID");
+            //  MightyOrm dbTestResult = new MightyOrm("Server=localhost\\SQLEXPRESS;Database=TaskQueueProcessor;ProviderName=System.Data.SqlClient;User=user;Password=user", "TestResult", "TestResultID");
+            /*
 
+              TestRun tr = new TestRun();
+              tr.Category = 2;
+              tr.Sha256 = "FakeSha256";
+              tr.Filename = "file.txt";
 
-            TestRun tr = new TestRun();
-            tr.Category = 2;
-            tr.Sha256 = "FakeSha256";
-            tr.Filename = "file.txt";
+              TestCase tc = new TestCase();
+              tc.TestCaseDesc = "Check out my fake description";
+              tc.HOriginal = 1.23456;
+              tc.HBitstring = 0.0001;
 
-            TestCase tc = new TestCase();
-            tc.TestCaseDesc = "Check out my fake description";
-            tc.HOriginal = 1.23456;
-            tc.HBitstring = 0.0001;
+              TestResult testResult = new TestResult();
+              testResult.Iteration = "123";
+              testResult.Excursion = 0.5;
 
-            TestResult testResult = new TestResult();
-            testResult.Iteration = "123";
-            testResult.Excursion = 0.5;
+              tc.TestResults.Add(testResult);
+              tr.TestCases.Add(tc);
 
-            tc.TestResults.Add(testResult);
-            tr.TestCases.Add(tc);
+              // DatabaseConnector.storeTestRun(dbTestRun, dbTestCase, dbTestResult, tr);
 
-            // DatabaseConnector.storeTestRun(dbTestRun, dbTestCase, dbTestResult, tr);
+              DatabaseConnector.storeTestRun(tr);
+            */
 
-            DatabaseConnector.storeTestRun(tr);
-
-
+            Console.WriteLine(DatabaseConnector.isTaskQueueEmpty());
+            Console.WriteLine(DatabaseConnector.getNextTaskQueueItem().CreatedOn);
 
         }
     }
